@@ -1,6 +1,16 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import '@/styles/globals.scss'
+import { AppProps } from 'next/app'
+import MainProvider from '@/providers/MainProvider'
+import { TypeComponentAuthFields } from '@/types/auth.types'
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+type TypeAppProps = AppProps & TypeComponentAuthFields
+
+function App({ Component, pageProps }: TypeAppProps) {
+	return (
+		<MainProvider Component={Component}>
+			<Component {...pageProps} />
+		</MainProvider>
+	)
 }
+
+export default App
